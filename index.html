@@ -1,18 +1,18 @@
 <html>
     <head>
-        <title>Lab1 - Main</title>
+        <title>Main</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <header>
+        <header id="block-1">
             <div class="main_title">
                 <h1>Lorem</h1>
             </div>
             <h2>ipsum</h2>
         </header>
         <footer>
-            <div class="menu">
+            <div id="block-2">
                 <div>
                     <h2>Menu:  &emsp; </h2>
                     <ul type="none">
@@ -23,11 +23,15 @@
                         <li><a href="pages/page4.html">Page 4</a>  &emsp; </li>
                         <li><a href="pages/page5.html">Page 5</a>  &emsp; </li>
                     </ul>
+                    <form>
+                        <input type="text" class="text" id="inputUserText"><br>
+                        <button type="button" id="btnClearText"><b>Clear</b></button>
+                    </form>
                 </div>
             </div>
             <div class="main_side">
                 <div class="main_upside">
-                    <div class="main_center_area">
+                    <div id="block-3">
                         <div>
                             <h2>Lorem</h2>
                             <p>
@@ -35,18 +39,37 @@
                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. At voluptates sunt, distinctio veritatis sit, corporis placeat alias, earum quam aperiam labore sapiente error laboriosam aut consequuntur harum deserunt! Officia, ad.
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium consequuntur facilis dolor corporis ratione nobis in vero? Beatae esse, voluptate, dicta rerum eligendi enim temporibus, est architecto tempore exercitationem commodi!
                             </p>
+                            <h3>Enter values:</h3>
+                            <form>
+                                <input type="number" class="num" id="num1">
+                                <input type="number" class="num" id="num2">
+                                <input type="number" class="num" id="num3">
+                                <input type="number" class="num" id="num4">
+                                <input type="number" class="num" id="num5">
+                                <input type="number" class="num" id="num6">
+                                <input type="number" class="num" id="num7">
+                                <input type="number" class="num" id="num8">
+                                <input type="number" class="num" id="num9">
+                                <input type="number" class="num" id="num10"><br><br>
+                                <button type="button" id="btnSubmit"><b>Submit</b></button>
+                            </form>
+                            <form>
+                                <button type="button" id="btnColorRed"><b>Red</b></button>
+                                <button type="button" id="btnColorGreen"><b>Green</b></button>
+                                <button type="button" id="btnColorBlack"><b>Black</b></button>
+                            </form>
                         </div>
                     </div>
                     <div class="main_right_side">
-                        <div class="add_upside_area">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero illo explicabo, fugiat ullam dicta veritatis nisi nam natus, quis consequuntur corrupti dolore? Nihil enim porro eveniet error praesentium ratione sit.
+                        <div id="block-4">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero illo explicabo, fugiat ullam dicta veritatis nisi nam natus, quis consequuntur corrupti dolore? Nihil enim porro eveniet error praesentium ratione sit.</p>
                         </div>
-                        <div class="add_downside_area">
+                        <div id="block-5">
                             <img src="images/ic_google_translate.png" />
                         </div>
                     </div>
                 </div>
-                <div class="main_downside">
+                <div id="block-6">
                     <div class="main_title">
                         <h2>Everyone loves lorem</h2>
                     </div>
@@ -54,5 +77,6 @@
                 </div>
             </div>
         </footer>
+        <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>
