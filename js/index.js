@@ -67,7 +67,7 @@ let task3 = () => {
                 arr.push(num);
             }
         }
-        alert('Min value: ' + Math.min(arr));
+        alert('Min value: ' + arr.reduce((a,b)=>Math.min(a,b), Infinity));
     }
 };
 
@@ -95,7 +95,7 @@ let task5 = () => {
 
 let task6 = () => {
     let expiresAttrib = new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toUTCString();
-    inputUserText.onchange = () => {
+    inputUserText.oninput = () => {
         document.cookie = '_savedText=' + inputUserText.value + ';expires=' + expiresAttrib + ';path=/';
     }
     btnClearText.onclick = () => {
