@@ -4,28 +4,48 @@ let block3 = document.getElementById('block-3');
 let block4 = document.getElementById('block-4');
 let block5 = document.getElementById('block-5');
 let block6 = document.getElementById('block-6');
-let btnSubmit = document.getElementById('btnSubmit');
+let inputNumber = document.getElementById('inputNumber');
+let btnCalculate = document.getElementById('btnCalculate');
 let btnColorRed = document.getElementById('btnColorRed');
 let btnColorGreen = document.getElementById('btnColorGreen');
 let btnColorBlack = document.getElementById('btnColorBlack');
 let inputUserText = document.getElementById('inputUserText');
-let btnClearText = document.getElementById('btnClearText');
+let btnSumbit = document.getElementById('btnSubmit');
 let a = 12, b = 6, c = 16;
 
 function loadColor() {
-    document.cookie.split(';').map(item => {
-        if (item.includes('_blockColor')) {
-            block3.style.color = item.substring(item.indexOf('=') + 1, item.length);
-        }    
-    });
+    block3.style.color = localStorage.getItem('textColor')
 };
 
-function loadText() {
-    document.cookie.split(';').map(item => {
-        if (item.includes('_savedText')) {
-            inputUserText.value = item.substring(item.indexOf('=') + 1, item.length);
-        }
-    });
+function loadChangedText(container) {
+    let content = localStorage.getItem(container.id);
+    
+    if (content) {
+        let backup = container.innerHTML;
+        container.innerHTML = content;
+
+        let button = document.createElement('button');
+        button.textContent = 'submit';
+        button.id = 'btnSubmit';
+        button.onclick = () => {
+            container.innerHTML = backup;
+            localStorage.removeItem(container.id);
+            loadRegularText(container);
+        };
+
+        container.appendChild(button);
+    }
+};
+
+function loadRegularText(container) {
+    let textArea = document.createElement('input');
+    textArea.textContent = container.innerHTML;
+    textArea.style.width = '50px';
+    textArea.oninput = () => {
+        localStorage.setItem(container.id, textArea.value);
+    };
+
+    container.appendChild(textArea);
 };
 
 let task1 = () => {
@@ -55,60 +75,57 @@ let task3 = () => {
         location.reload();
     }
 
-    btnSubmit.onclick = () => {
-        let numbers = document.getElementsByClassName('num');
+    btnCalculate.onclick = () => {
         let arr = [];
+        let i = 0;
         let expiresAttrib = new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toUTCString();
-        for (let i = 0; i < numbers.length; i++) {
-            if (numbers[i].value !== '') {
-                let num = Number(numbers[i].value);
-                let cookieString = 'num' + i + '=' + num + ';expires=' + expiresAttrib + ';path=/';
-                document.cookie = cookieString;
-                arr.push(num);
-            }
-        }
+        inputNumber.value.split(' ').forEach(elem => {
+            let num = Number(elem);
+            let cookieString = 'num' + i + '=' + num + ';expires=' + expiresAttrib + ';path=/';
+            document.cookie = cookieString;
+            arr.push(num);
+            i++;
+        });
         alert('Min value: ' + arr.reduce((a,b)=>Math.min(a,b), Infinity));
     }
 };
 
 let task4 = () => {
-    let expiresAttrib = new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toUTCString();
     btnColorRed.onclick = () => {
-        document.cookie = '_blockColor=red;expires=' + expiresAttrib + ';path=/';
+        localStorage.setItem('textColor', 'red');
         loadColor();
     }
     btnColorGreen.onclick = () => {
-        document.cookie = '_blockColor=green;expires=' + expiresAttrib + ';path=/';
+        localStorage.setItem('textColor', 'green');
         loadColor();
     }
     btnColorBlack.onclick = () => {
-        document.cookie = '_blockColor=black;expires=' + expiresAttrib + ';path=/';
+        localStorage.setItem('textColor', 'black');
         loadColor();
     }
 };
 
 let task5 = () => {
     window.addEventListener('load', event => {
-        alert('load event completed');
+        loadColor();
     });    
 };
 
 let task6 = () => {
-    let expiresAttrib = new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toUTCString();
-    inputUserText.oninput = () => {
-        document.cookie = '_savedText=' + inputUserText.value + ';expires=' + expiresAttrib + ';path=/';
-    }
-    btnClearText.onclick = () => {
-        inputUserText.value = '';
-        document.cookie = '_savedText=;';
-    }
+    let blocks = [block1, block2, block3, block4, block5, block6];
+
+    blocks.forEach(block => {
+        if (localStorage.getItem(block.id)) {
+            loadChangedText(block);
+        } else {
+            loadRegularText(block);
+        }
+    });
 };
 
-loadColor();
-loadText();
 task1();
 task2();
 task3();
 task4();
-// task5();
+task5();
 task6();
