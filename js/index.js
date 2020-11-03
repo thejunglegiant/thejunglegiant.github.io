@@ -9,43 +9,41 @@ let btnCalculate = document.getElementById('btnCalculate');
 let btnColorRed = document.getElementById('btnColorRed');
 let btnColorGreen = document.getElementById('btnColorGreen');
 let btnColorBlack = document.getElementById('btnColorBlack');
-let inputUserText = document.getElementById('inputUserText');
-let btnSumbit = document.getElementById('btnSubmit');
 let a = 12, b = 6, c = 16;
 
 function loadColor() {
     block3.style.color = localStorage.getItem('textColor')
 };
 
-function loadChangedText(container) {
-    let content = localStorage.getItem(container.id);
-    
+function loadChangedText(block) {
+    let content = localStorage.getItem(block.id);
+
     if (content) {
-        let backup = container.innerHTML;
-        container.innerHTML = content;
+        let backup = block.innerHTML;
+        block.innerHTML = content;
 
         let button = document.createElement('button');
         button.textContent = 'submit';
         button.id = 'btnSubmit';
         button.onclick = () => {
-            container.innerHTML = backup;
-            localStorage.removeItem(container.id);
-            loadRegularText(container);
+            block.innerHTML = backup;
+            localStorage.removeItem(block.id);
+            loadRegularText(block);
         };
 
-        container.appendChild(button);
+        block.appendChild(button);
     }
 };
 
-function loadRegularText(container) {
+function loadRegularText(block) {
     let textArea = document.createElement('input');
-    textArea.textContent = container.innerHTML;
+    textArea.textContent = block.innerHTML;
     textArea.style.width = '50px';
     textArea.oninput = () => {
-        localStorage.setItem(container.id, textArea.value);
+        localStorage.setItem(block.id, textArea.value);
     };
 
-    container.appendChild(textArea);
+    block.appendChild(textArea);
 };
 
 let task1 = () => {
