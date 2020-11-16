@@ -120,3 +120,22 @@ footer {
     text-align: right;
     padding: 32px;
 }
+
+#bodyError {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    width: 500px;
+    height: 250px;
+    font-size: 2rem;
+    position: absolute;
+    border-width: 5px;
+    border-radius: 25px;
+    border-color: black;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
